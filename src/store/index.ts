@@ -1,20 +1,36 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
-import type { TypedUseSelectorHook } from 'react-redux';
+/**
+ * Create the store with dynamic reducers
+ */
 
-export const store = configureStore({
-  reducer: {
-    // Add reducers here
-  },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
+import { configureStore, type StoreEnhancer, type Middleware } from '@reduxjs/toolkit';
+import { createInjectorsEnhancer } from 'redux-injectors';
+import createSagaMiddleware from 'redux-saga';
+
+import { createReducer } from './rootReducer';
+
+export function configureAppStore() {
+  const sagaMiddleware = createSagaMiddleware();
+  const { run: runSaga } = sagaMiddleware;
+
+  // Create the store with saga middleware
+  const middlewares = [sagaMiddleware] as Middleware[];
+
+  const enhancers = [
+    createInjectorsEnhancer({
+      createReducer,
+      runSaga,
     }),
-});
+  ] as StoreEnhancer[];
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+  const store = configureStore({
+    reducer: createReducer(),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({ serializableCheck: false }).concat(middlewares) as ReturnType<
+        typeof getDefaultMiddleware
+      >,
+    devTools: import.meta.env.DEV,
+    enhancers: getDefaultEnhancers => getDefaultEnhancers().concat(enhancers),
+  });
 
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  return store;
+}

@@ -1,6 +1,6 @@
-# React TypeScript Project Template
+# React Project Template
 
-A modern React project template with TypeScript, Redux Toolkit, React Router, and more.
+Built with TypeScript, Redux Toolkit, React Router, and more.
 
 ## Features
 
@@ -11,6 +11,7 @@ A modern React project template with TypeScript, Redux Toolkit, React Router, an
 - 🛣️ [React Router](https://reactrouter.com/) - Declarative routing for React
 - 📡 [Axios](https://axios-http.com/) - Promise based HTTP client
 - 🧪 [Jest](https://jestjs.io/) & [Testing Library](https://testing-library.com/) - Testing utilities
+- 💅 [Styled Components](https://styled-components.com/) - Visual primitives for the component age
 - 💅 [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) - Code linting and formatting
 - 🐶 [Husky](https://typicode.github.io/husky/) & [lint-staged](https://github.com/okonet/lint-staged) - Git hooks
 
@@ -24,13 +25,16 @@ src/
 │   └── layout/      # Layout components
 ├── features/         # Feature-based modules
 │   ├── auth/        # Authentication feature
-│   ├── common/      # Common features
-│   └── user/        # User management feature
+│   ├── userDetail/  # User repo GitHub feature
+│   ├── userProfile/ # User info GitHub feature
+│   └── common/      # Common features
 ├── hooks/           # Custom React hooks
 ├── layouts/         # Page layouts
 ├── lib/             # Third-party library configurations
 ├── services/        # API services and configurations
+├── slice/           # Redux slices
 ├── store/           # Redux store setup
+├── styles/          # Styling files
 ├── types/           # TypeScript type definitions
 ├── utils/           # Utility functions
 └── __tests__/       # Test files
@@ -45,23 +49,10 @@ src/
 
 ### Installation
 
-1. Clone the repository:
-
-```bash
-git clone <repository-url>
-cd <project-name>
-```
-
-2. Install dependencies:
+Install dependencies:
 
 ```bash
 npm install
-```
-
-3. Create a `.env` file in the root directory and add your environment variables:
-
-```env
-VITE_API_URL=your_api_url_here
 ```
 
 ### Development
@@ -137,15 +128,3 @@ npm run lint
    - Use meaningful commit messages
    - Create feature branches for new features
    - Keep PRs small and focused
-
-## Contributing
-
-1. Create a new branch for your feature
-2. Make your changes
-3. Write or update tests
-4. Run tests and linting
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
