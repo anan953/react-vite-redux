@@ -12,7 +12,10 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "postinstall": "husky",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
@@ -38,6 +41,8 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.25.0",
     "@types/jest": "^29.5.14",
     "@types/react": "^18.2.55",
@@ -61,7 +66,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md}": [
+    "*.{json,css,scss,md}": [
       "prettier --write"
     ]
   }
